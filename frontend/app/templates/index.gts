@@ -1,27 +1,29 @@
+import BookingSummary from "ember-boilerplate/components/booking-details";
+import PropertyCard from "ember-boilerplate/components/property-card";
+import SearchBar from "ember-boilerplate/components/search-bar";
 import RouteTemplate from "ember-route-template";
 
 export default RouteTemplate(
   <template>
-    <div class="bg-white">
-      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <img src="/assets/images/triptyk.png" alt="TRIPTYK" class="w-16 inline-block" />
-          <h2 class="text-base font-semibold tracking-wide uppercase text-primary">
-            The Ember Boilerplate
-          </h2>
-          <p
-            class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
+      <div class="self-stretch mt-20 mb-16 max-md:max-w-full max-md:my-10">
+        <div class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
+          <div
+            class="flex flex-col items-stretch w-[63%] max-md:w-full max-md:ml-0"
           >
-            Better, Faster, Stronger than ever.
-          </p>
-          <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">
-            The Ember Boilerplate is a modern, opinionated, and powerful
-            starting point for Ember apps.
-            Ready for Ember Polaris !
-          </p>
+            <div
+              class="items-stretch content-start flex-wrap flex grow flex-col max-md:max-w-full max-md:mt-10"
+            >
+              <SearchBar />
+              <PropertyCard />
+            </div>
+          </div>
+          <div
+            class="flex flex-col items-stretch w-[37%] ml-5 max-md:w-full max-md:ml-0"
+          >
+            <BookingSummary />
+          </div>
         </div>
       </div>
-    </div>
   </template>
 );
 

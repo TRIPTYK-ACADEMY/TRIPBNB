@@ -44,13 +44,6 @@ const FormsLogin: TOC<FormsLoginSignature> = <template>
       class="input_block"
       data-test-input="password"
     />
-    <div class="flex items-center justify-between">
-      <div class="text-sm">
-        <LinkTo @route="forgot-password" class="font-medium text-primary hover:text-secondary">
-          {{t "components.forms.login.forgot_password"}}
-        </LinkTo>
-      </div>
-    </div>
     <div>
       <button data-test-submit type="submit" class="btn">
         <span>

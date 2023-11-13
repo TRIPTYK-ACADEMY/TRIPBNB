@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 
+import Header from "ember-boilerplate/components/header";
 // @ts-expect-error no types
 import FlashMessage from 'ember-cli-flash/components/flash-message';
 // @ts-expect-error no types
@@ -19,7 +20,10 @@ class ApplicationRouteComponent extends Component {
         <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
-    {{outlet}}
+    <div class="bg-background flex flex-col pl-8 pr-10 max-md:px-5">
+      <Header />
+      {{outlet}}
+    </div>
   </template>
 }
 
