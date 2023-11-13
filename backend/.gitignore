@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage
+.DS_Store
+
+" Big Up to my vim homies
+*.swp
+*.swo
+
+config/env

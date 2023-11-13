@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNEXT"],
+    "strict": true,
+    "target": "ESNext",
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "verbatimModuleSyntax": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*", "tests/**/*", "vitest.workspace.ts", "config/**/*.ts"]
+}
