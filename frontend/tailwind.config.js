@@ -17,6 +17,10 @@ module.exports = {
         '3xl': '1680px',
       },
     },
+    fontFamily: {
+      primary: ['Montserrat', 'sans-serif'],
+      secondary:['Lexend', 'sans-serif'],
+    },
     colors: {
       primary: '#5AA69D',
       secondary: '#C98C55',
