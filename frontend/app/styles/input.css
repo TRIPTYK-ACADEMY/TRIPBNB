@@ -20,14 +20,14 @@ fieldset {
 
 .input_block input,
 .textarea_block textarea {
-  @apply w-full px-3 py-2 border border-transparent rounded bg-background text-text/70;
+  @apply w-full px-3 py-2 border border-transparent rounded shadow-md text-text/70 font-secondary;
 }
 
 .input_block label,
 .tpk-input-label,
 .tpk-select-label,
 .tpk-textarea-label {
-  @apply relative block mb-1 text-text;
+  @apply relative block mb-1 text-text font-secondary;
 }
 
 .input_block aside {
@@ -56,7 +56,7 @@ fieldset {
 /*** SEARCH BAR  ****/
 
 .search_bar {
-  @apply relative rounded bg-background;
+  @apply relative rounded bg-white;
 }
 
 .search_bar label {
@@ -64,14 +64,20 @@ fieldset {
 }
 
 .search_bar input {
-  @apply p-2 bg-transparent w-full pl-14;
+  @apply pr-2 bg-transparent w-full pl-6 py-4 text-lg;
+}
+
+.search_bar input::placeholder {
+  @apply text-black;
 }
 
 .search_bar button {
-  @apply absolute left-0 top-2.5 w-5 h-5 ml-3;
+  @apply absolute right-0 top-2.5 rounded w-5 h-5 mr-2.5 bg-primary p-5;
 
-  background: url("/assets/icons/search.svg") center left no-repeat;
-  background-size: cover;
+  background-image: url("/assets/icons/search.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 50%;
 }
 
 .search_bar button span {
@@ -223,7 +229,7 @@ label {
 }
 
 .tpk-select-button {
-  @apply bg-background relative w-full flex rounded border text-text/70 border-background shadow-sm pl-3 pr-10 py-2.5 text-left cursor-default focus:outline-none focus:ring-2 ring-secondary focus:border-secondary;
+  @apply bg-white relative w-full flex rounded border text-text/70 border-white shadow-md pl-3 pr-10 py-2.5 text-left cursor-default focus:outline-none focus:ring-1 ring-primary focus:border-primary;
 }
 
 .tpk-select-button::after {

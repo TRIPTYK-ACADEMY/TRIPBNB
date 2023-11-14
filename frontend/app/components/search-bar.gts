@@ -1,16 +1,60 @@
-export default <template>
-  <div
-    class="items-center rounded shadow-sm bg-white flex justify-between gap-5 pl-6 pr-2.5 py-2 max-md:max-w-full max-md:flex-wrap max-md:pl-5"
-  >
-    <div
-      class="text-slate-700 text-lg tracking-normal grow shrink basis-auto my-auto max-md:max-w-full"
+import Component from '@glimmer/component';
+import { on } from '@ember/modifier';
+import { action } from '@ember/object';
+
+import TpkInput from '@triptyk/ember-input/components/tpk-input';
+import { tracked } from 'tracked-built-ins';
+
+export interface SearchBarSignature {
+  Args: {
+    label: string;
+    placeholder?: string;
+    onSearch: (value: string, e?: Event) => void;
+  };
+  Blocks: {
+    default: [];
+  };
+  Element: HTMLDivElement;
+}
+
+export default class PropertyCard extends Component<SearchBarSignature> {
+  @tracked searchValue = '';
+  @action
+  updateSearchValue(v: string | number | Date | null) {
+    if (!v) return;
+    this.searchValue = v.toString();
+  }
+
+  @action
+  onSearch(e: Event) {
+    e.preventDefault();
+    this.args.onSearch(this.searchValue, e);
+  }
+  <template>
+    <TpkInput
+      @label={{@label}}
+      @value={{this.searchValue}}
+      @onChange={{this.updateSearchValue}}
+      @type="search"
+      class="search_bar w-full"
+      data-test-search-input="search"
+      ...attributes
+      as |TI|
     >
-      Trouvez votre TRIPNB... comme un ninja cherchant son dojo
-    </div>
-    <img
-      loading="lazy"
-      src="https://cdn.builder.io/api/v1/image/assets/TEMP/2b506a32-8ddc-4720-b293-816b8e78bd09?"
-      class="aspect-square object-contain object-center w-11 overflow-hidden self-stretch shrink-0 max-w-full"
-    />
-  </div>
-</template>
+      <form {{on "submit" this.onSearch}}>
+        <TI.Label>
+          {{@label}}
+        </TI.Label>
+        <TI.Input
+          placeholder={{@placeholder}}
+          aria-autocomplete="none"
+          autocomplete="off"
+          autofill="off"
+        />
+        <button type="submit" data-test-search-submit>
+          <span>Rechercher</span>
+        </button>
+      </form>
+    </TpkInput>
+  </template>
+}
