@@ -1,246 +1,252 @@
-export default <template>
-        <div
-        class="flex flex-col items-stretch w-[68%] max-md:w-full max-md:ml-0"
-      >
-        <div
-          class="rounded bg-white flex grow flex-col w-full mx-auto pl-14 pr-11 pt-10 pb-12 max-md:max-w-full max-md:mt-8 max-md:px-5"
+import Component from '@glimmer/component';
+import { concat } from '@ember/helper';
+import { on } from '@ember/modifier';
+import { action } from '@ember/object';
+import { service } from '@ember/service';
+
+import InputsDatepickerValidation from 'ember-boilerplate/components/inputs/datepicker-validation';
+import InputsValidation from 'ember-boilerplate/components/inputs/input-validation';
+import InputsSelectValidation from 'ember-boilerplate/components/inputs/select-validation';
+import { tracked } from 'tracked-built-ins';
+
+import YupForm from './yup-form';
+
+import type RouterService from '@ember/routing/router-service';
+import type { BookingChangeset } from 'ember-boilerplate/changesets/booking';
+import type { Schema } from 'yup';
+export interface FormsBookingSignature {
+  Args: {
+    changeset: BookingChangeset;
+    saveFunction: (changeset: BookingChangeset) => unknown;
+    validationSchema: Schema;
+    maxGuests: number;
+    disabledDates: { from: string; to: string }[];
+  };
+  Blocks: {
+    default: [];
+  };
+  Element: HTMLFormElement;
+}
+
+export default class FormsBookingComponent extends Component<FormsBookingSignature> {
+  @service declare router: RouterService;
+  @tracked guestsOptions: number[] = [];
+  toString = (value: unknown): string => {
+    return String(value ?? '');
+  };
+  inc = (value: number): number => {
+    return value + 1;
+  };
+  constructor(owner: unknown, args: FormsBookingSignature['Args']) {
+    super(owner, args);
+
+    const options = [];
+
+    for (let i = 1; i <= args.maxGuests; i++) {
+      options.push(i);
+    }
+
+    this.guestsOptions = options;
+  }
+
+  get minDate() {
+    return this.args.changeset.get('startAt');
+  }
+
+  get guestsNumber() {
+    return this.args.changeset.get('number');
+  }
+
+  get guests() {
+    return this.args.changeset.get('guests');
+  }
+
+  @action
+  setGuestNumber(value: unknown) {
+    const number = value as number;
+
+    this.args.changeset.set('number', number);
+
+    if (number > 1) {
+      let guestNumber = number - 1;
+      let currentGuests = [...this.args.changeset.get('guests')];
+
+      const difference = guestNumber - currentGuests.length;
+
+      if (difference > 0) {
+        for (let i = 0; i < difference; i++) {
+          currentGuests.push({ lastName: '', firstName: '' });
+        }
+      } else if (difference < 0) {
+        currentGuests.splice(difference);
+      }
+
+      this.args.changeset.set('guests', [...currentGuests]);
+    } else {
+      this.args.changeset.set('guests', []);
+    }
+  }
+
+  @action
+  async backList() {
+    await this.router.transitionTo('index');
+  }
+
+  <template>
+    <YupForm
+      class="bg-white px-6 py-8 rounded-md"
+      @onSubmit={{@saveFunction}}
+      @changeset={{@changeset}}
+      @validationSchema={{@validationSchema}}
+      ...attributes
+      data-test-form-booking
+    >
+      <button type="button" class="flex items-center space-x-4 group" {{on "click" this.backList}}>
+        <img
+          loading="lazy"
+          src="/assets/icons/arrow-left.svg"
+          class="h-6 duration-200 group-hover:translate-x-1"
+        />
+        <span>Retour</span>
+      </button>
+      <fieldset class="grid grid-cols-12 gap-x-8 gap-y-6">
+        <h3 class="text-2xl font-semibold mt-8 mb-2 col-span-12">Votre voyage</h3>
+        <InputsDatepickerValidation
+          @changeset={{@changeset}}
+          @validationField="startAt"
+          @label="Arrivée"
+          {{!-- @disable={{@disabledDates}} --}}
+          class="input_block col-span-4"
+        />
+        {{#if this.minDate}}
+          <InputsDatepickerValidation
+            @changeset={{@changeset}}
+            @validationField="endAt"
+            @label="Départ"
+            @minDate={{this.minDate}}
+            {{!-- @disable={{@disabledDates}} --}}
+            class="input_block col-span-4"
+          />
+        {{else}}
+          <div class="col-span-4"></div>
+        {{/if}}
+        <InputsSelectValidation
+          @options={{this.guestsOptions}}
+          @onChange={{this.setGuestNumber}}
+          @changeset={{@changeset}}
+          @validationField="number"
+          @label="Voyageurs"
+          @defaultText="Sélectionner le nombre de voyageur"
+          class="input_block col-span-8"
         >
-          <div class="flex w-[79px] max-w-full gap-2 self-start">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/4bddfc18-9e97-4955-998d-65a475b8caec?"
-              class="aspect-[1.9] object-contain object-center w-[19px] stroke-[1px] stroke-black overflow-hidden shrink-0 max-w-full"
+          {{! @glint-expect-error }}
+          <:option as |o|>
+            {{o.option}}
+            voyageurs
+          </:option>
+          <:selected as |s|>
+            {{this.toString s}}
+            voyageurs
+          </:selected>
+          <:notSelected>
+            Sélectionner le nombre de voyageur
+          </:notSelected>
+        </InputsSelectValidation>
+      </fieldset>
+      <fieldset class="grid grid-cols-12 gap-x-8 gap-y-6">
+        <h3 class="text-2xl font-semibold mt-8 mb-2 col-span-12">Vos informations</h3>
+        <InputsValidation
+          @label="Nom"
+          @changeset={{@changeset}}
+          @validationField="lastName"
+          class="input_block col-span-4"
+          data-test-input="lastName"
+        />
+        <InputsValidation
+          @label="Prénom"
+          @changeset={{@changeset}}
+          @validationField="firstName"
+          class="input_block col-span-4"
+          data-test-input="firstName"
+        />
+        <InputsValidation
+          @label="Email"
+          @changeset={{@changeset}}
+          @validationField="email"
+          class="input_block col-span-4"
+          data-test-input="email"
+        />
+        <h3 class="text-xl font-medium my-2 col-span-12">Addresses</h3>
+        <InputsValidation
+          @label="Rue"
+          @changeset={{@changeset}}
+          @validationField="adress.street"
+          class="input_block col-span-8"
+          data-test-input="street"
+        />
+        <InputsValidation
+          @label="Numéro"
+          @changeset={{@changeset}}
+          @validationField="adress.number"
+          class="input_block col-span-4"
+          data-test-input="number"
+        />
+        <InputsValidation
+          @label="Ville"
+          @changeset={{@changeset}}
+          @validationField="adress.city"
+          class="input_block col-span-4"
+          data-test-input="city"
+        />
+        <InputsValidation
+          @label="Code Postal"
+          @changeset={{@changeset}}
+          @validationField="adress.zip"
+          class="input_block col-span-4"
+          data-test-input="zip"
+        />
+        <InputsValidation
+          @label="Pays"
+          @changeset={{@changeset}}
+          @validationField="adress.country"
+          class="input_block col-span-4"
+          data-test-input="country"
+        />
+      </fieldset>
+      {{#if this.guestsNumber}}
+        <fieldset class="grid grid-cols-12 gap-x-8 gap-y-6">
+          <h3 class="text-2xl font-semibold mt-8 col-span-12">Voyageurs</h3>
+          {{#each this.guests as |guest index|}}
+            <h4 class="font-semibold text-sm -mb-3 col-span-12">Voyageur {{this.inc index}}</h4>
+            <InputsValidation
+              @label="Nom"
+              @changeset={{@changeset}}
+              @validationField={{concat "guests." index ".lastName"}}
+              class="input_block col-span-4"
+              data-test-input={{concat "guests." index ".lastName"}}
             />
-            <div
-              class="text-black text-base tracking-normal self-stretch whitespace-nowrap"
-            >
-              Retour
-            </div>
-          </div>
-          <div
-            class="text-black text-2xl font-semibold tracking-wide self-stretch whitespace-nowrap mt-12 max-md:max-w-full max-md:mt-10"
-          >
-            Votre voyage
-          </div>
-          <div
-            class="text-black text-lg font-medium tracking-normal self-stretch whitespace-nowrap mt-5 max-md:max-w-full"
-          >
-            Dates
-          </div>
-          <div
-            class="text-black text-base tracking-normal self-stretch whitespace-nowrap mt-3 max-md:max-w-full"
-          >
-            17 Juillet 2024 - 19 Juillet 2024
-          </div>
-          <div
-            class="text-black text-lg font-medium tracking-normal self-stretch whitespace-nowrap mt-5 max-md:max-w-full"
-          >
-            Voyageurs
-          </div>
-          <div
-            class="text-black text-base tracking-normal self-stretch whitespace-nowrap mt-2 max-md:max-w-full"
-          >
-            4 voyageurs
-          </div>
-          <div
-            class="text-black text-2xl font-semibold tracking-wide self-stretch whitespace-nowrap mt-10 max-md:max-w-full"
-          >
-            Vos informations
-          </div>
-          <div class="self-stretch mt-9 max-md:max-w-full">
-            <div
-              class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
-            >
-              <div
-                class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
-              >
-                <div
-                  class="flex grow pt-0 flex-col items-stretch mt-6 max-md:mt-10"
-                >
-                  <div class="z-[1] flex mt-0 flex-col items-stretch">
-                    <div class="text-slate-700 text-xs whitespace-nowrap">
-                      Nom
-                    </div>
-                    <div
-                      class="text-slate-700 text-xs whitespace-nowrap rounded shadow-sm bg-white items-stretch mt-1.5 pt-2.5 pb-6"
-                    >
-                      Nom
-                    </div>
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col"
-                  ></div>
-                  <div
-                    class="text-black text-lg font-medium whitespace-nowrap mt-3"
-                  >
-                    Adresses
-                  </div>
-                </div>
-              </div>
-              <div
-                class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
-              >
-                <div class="flex flex-col items-stretch max-md:mt-10">
-                  <div class="text-slate-700 text-xs whitespace-nowrap">
-                    Prénom
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
-              >
-                <div class="flex flex-col items-stretch max-md:mt-10">
-                  <div class="text-slate-700 text-xs whitespace-nowrap">
-                    Email
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="self-stretch flex items-stretch justify-between gap-5 mt-7 max-md:max-w-full max-md:flex-wrap"
-          >
-            <div class="flex grow basis-[0%] flex-col items-stretch">
-              <div class="text-slate-700 text-xs whitespace-nowrap">Rue</div>
-              <div
-                class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-              ></div>
-            </div>
-            <div class="flex basis-[0%] flex-col items-stretch">
-              <div class="text-slate-700 text-xs whitespace-nowrap">Numéro</div>
-              <div
-                class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-              ></div>
-            </div>
-          </div>
-          <div
-            class="self-stretch flex items-stretch justify-between gap-5 mt-7 max-md:max-w-full max-md:flex-wrap max-md:justify-center"
-          >
-            <div class="flex grow basis-[0%] flex-col items-stretch">
-              <div class="text-slate-700 text-xs whitespace-nowrap">Ville</div>
-              <div
-                class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-              ></div>
-            </div>
-            <div class="flex grow basis-[0%] flex-col items-stretch">
-              <div class="text-slate-700 text-xs whitespace-nowrap">
-                Code postal
-              </div>
-              <div
-                class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col"
-              ></div>
-            </div>
-            <div class="flex grow basis-[0%] flex-col items-stretch">
-              <div class="text-slate-700 text-xs whitespace-nowrap">Pays</div>
-              <div
-                class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col"
-              ></div>
-            </div>
-          </div>
-          <div class="w-[408px] max-w-full mt-12 self-start max-md:mt-10">
-            <div
-              class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
-            >
-              <div
-                class="flex flex-col items-stretch w-6/12 max-md:w-full max-md:ml-0"
-              >
-                <div class="flex grow flex-col items-stretch max-md:mt-10">
-                  <div
-                    class="text-black text-2xl font-semibold whitespace-nowrap"
-                  >
-                    Voyageurs
-                  </div>
-                  <div class="z-[1] flex flex-col items-stretch mt-6">
-                    <div class="text-slate-700 text-xs whitespace-nowrap">
-                      Nom
-                    </div>
-                    <div
-                      class="text-slate-700 text-xs whitespace-nowrap rounded shadow-sm bg-white items-stretch mt-1.5 pt-2.5 pb-6"
-                    >
-                      Nom
-                    </div>
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col"
-                  ></div>
-                  <div
-                    class="text-slate-700 text-xs z-[1] mt-0 whitespace-nowrap"
-                  >
-                    Nom
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-                  ></div>
-                  <div class="text-slate-700 text-xs whitespace-nowrap mt-5">
-                    Nom
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-                  ></div>
-                </div>
-              </div>
-              <div
-                class="flex flex-col items-stretch w-6/12 ml-5 max-md:w-full max-md:ml-0"
-              >
-                <div
-                  class="flex grow pt-0 flex-col items-stretch mt-16 max-md:mt-10"
-                >
-                  <div class="z-[1] flex mt-0 flex-col items-stretch">
-                    <div class="text-slate-700 text-xs whitespace-nowrap">
-                      Prénom
-                    </div>
-                    <div
-                      class="text-slate-700 text-xs whitespace-nowrap rounded shadow-sm bg-white items-stretch mt-1.5 pt-2 pb-6"
-                    >
-                      Prénom
-                    </div>
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col"
-                  ></div>
-                  <div
-                    class="text-slate-700 text-xs z-[1] whitespace-nowrap -mt-1.5"
-                  >
-                    Prénom
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-                  ></div>
-                  <div class="text-slate-700 text-xs whitespace-nowrap mt-4">
-                    Prénom
-                  </div>
-                  <div
-                    class="rounded shadow-sm bg-white flex shrink-0 h-10 flex-col mt-1.5"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex-col fill-slate-500 overflow-hidden relative flex aspect-[7.571428571428571] w-full items-stretch gap-2.5 mt-14 px-2.5 py-2.5 self-end max-md:mt-10"
-          >
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/64bd25c8-f949-4c4c-8eac-048f919dcf99?"
-              class="absolute z-[-1] h-full w-full object-cover object-center inset-0"
+            <InputsValidation
+              @label="Prénom"
+              @changeset={{@changeset}}
+              @validationField={{concat "guests." index ".firstName"}}
+              class="input_block col-span-4"
+              data-test-input={{concat "guests." index ".firstName"}}
             />
-            <div
-              class="relative justify-center text-white text-sm leading-7 tracking-normal"
-            >
-              Confirmer la réservation
-            </div>
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/20cefbf5-0b6e-4349-980b-58e5921dd181?"
-              class="aspect-[1.86] object-contain object-center w-[13px] stroke-[1px] stroke-white overflow-hidden shrink-0 max-w-full self-start"
-            />
-          </div>
-        </div>
-      </div>
-</template>
+            <div class="col-span-4"></div>
+          {{/each}}
+        </fieldset>
+      {{/if}}
+      <button
+        type="submit"
+        class="mt-8 px-3 py-1 bg-primary text-white font-thin flex items-center space-x-4 rounded group ml-auto"
+      >
+        <span>Réserver</span>
+        <img
+          loading="lazy"
+          src="/assets/icons/arrow-right.svg"
+          class="h-6 duration-200 group-hover:-translate-x-1"
+        />
+      </button>
+    </YupForm>
+  </template>
+}

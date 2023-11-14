@@ -10,16 +10,16 @@ export interface InputsSelectValidationSignature {
   Args: {
     label: string;
     options: unknown[];
-    multiple: boolean;
-    selected: unknown;
+    multiple?: boolean;
+    selected?: unknown;
     onChange: (value: unknown) => void;
-    mandatory: boolean;
+    mandatory?: boolean;
     changeset: ImmerChangeset;
-    onSearch: (value: string) => void;
+    onSearch?: (value: string) => void;
     validationField: string;
-    classless: boolean;
-    disabled: boolean;
-    inputSelectStyle: string;
+    classless?: boolean;
+    disabled?: boolean;
+    inputSelectStyle?: string;
     defaultText: string;
   };
   Element: HTMLDivElement;

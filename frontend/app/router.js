@@ -10,5 +10,5 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('404', { path: '/*path' });
   this.route('login');
-  this.route('booking');
+  this.route('booking', { path: '/booking/:accomodation_id' });
 });
