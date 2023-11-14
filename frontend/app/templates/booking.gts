@@ -9,11 +9,11 @@ import FormsBooking from 'ember-boilerplate/components/forms/booking';
 import validationsBooking from 'ember-boilerplate/validations/booking';
 import RouteTemplate from 'ember-route-template';
 
-import type { AccomodationSignature } from 'ember-boilerplate/templates/index';
+import type AccomodationModel from 'ember-boilerplate/models/accomodation';
 
 export interface BookingRouteComponentSignature {
   Args: {
-    model: AccomodationSignature;
+    model: AccomodationModel;
   };
 }
 
@@ -22,7 +22,6 @@ class BookingRouteComponent extends Component<BookingRouteComponentSignature> {
   validationSchema = validationsBooking;
   public constructor(owner: unknown, args: BookingRouteComponentSignature['Args']) {
     super(owner, args);
-    console.log(args.model);
     this.changeset = new BookingChangeset({
       startAt: null,
       endAt: null,
@@ -50,6 +49,7 @@ class BookingRouteComponent extends Component<BookingRouteComponentSignature> {
           class="w-7/12"
         />
         <div class="flex flex-col items-stretch w-5/12 ml-5 max-md:w-full max-md:ml-0">
+          <h3 class="mb-1 text-primary text-sm">Récapitulatif</h3>
           <BookingResume @accomodation={{@model}} @changeset={{this.changeset}} />
         </div>
       </div>

@@ -31,6 +31,7 @@ export interface FormsBookingSignature {
 export default class FormsBookingComponent extends Component<FormsBookingSignature> {
   @service declare router: RouterService;
   @tracked guestsOptions: number[] = [];
+
   toString = (value: unknown): string => {
     return String(value ?? '');
   };

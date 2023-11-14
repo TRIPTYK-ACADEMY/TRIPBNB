@@ -4,11 +4,11 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 
 import type RouterService from '@ember/routing/router-service';
-import type { AccomodationSignature } from 'ember-boilerplate/templates/index';
+import type AccomodationModel from 'ember-boilerplate/models/accomodation';
 
 export interface AccomodationCardSignature {
   Args: {
-    accomodation: AccomodationSignature;
+    accomodation: AccomodationModel;
   };
   Blocks: {
     default: [];
@@ -53,7 +53,7 @@ export default class AccomodationCard extends Component<AccomodationCardSignatur
         </div>
         <div class="flex items-center self-end flex-grow text-3xl my-16 font-light">
           {{@accomodation.price}}
-          par nuit
+          € par nuit
         </div>
         <div class="flex justify-between">
           <div class="flex items-center">

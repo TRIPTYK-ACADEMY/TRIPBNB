@@ -1,11 +1,11 @@
 import Component from '@glimmer/component';
 
 import type { BookingChangeset } from 'ember-boilerplate/changesets/booking';
-import type { AccomodationSignature } from 'ember-boilerplate/templates/index';
+import type AccomodationModel from 'ember-boilerplate/models/accomodation';
 export interface BookingResumeSignature {
   Args: {
     changeset: BookingChangeset;
-    accomodation: AccomodationSignature;
+    accomodation: AccomodationModel;
   };
   Blocks: {
     default: [];
