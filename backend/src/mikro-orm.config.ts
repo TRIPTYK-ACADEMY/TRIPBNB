@@ -9,6 +9,7 @@ const config: Options = {
     entities: [addressSchema, accomodationSchema, bookingSchema, userSchema, guestSchema],
     dbName: 'postgres',
     user: 'postgres',
+    debug: true,
     password: 'test123*'
 };
 

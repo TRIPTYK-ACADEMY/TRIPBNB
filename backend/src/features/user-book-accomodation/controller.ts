@@ -3,18 +3,14 @@ import { inject, singleton } from "@triptyk/nfw-core";
 import UserBookAccomodationCommand from "./command.js";
 import {
   Controller,
-  Ctx,
-  GET,
   POST,
   UseResponseHandler,
 } from "@triptyk/nfw-http";
-import type { RouterContext } from "@koa/router";
 import UserBookPlaceCommandInputSchema from "./validation-schema.js";
 import promiseToResult from "../../utils/promise-to-result.js";
 import { Result } from "true-myth";
 import ErrorHandlerResponseHandler from "../../response-handler/error-handler.response-handler.js";
 import {
-  JsonApiResourceDeserializer,
   JsonApiResourceSerializer,
 } from "@triptyk/nfw-resources";
 import { JsonApiBody } from "../../decorators/json-api-body.js";
@@ -33,8 +29,8 @@ export default class UserBookAccomodationController {
     private readonly serializer: JsonApiResourceSerializer
   ) {}
 
-  @POST("/book-place")
-  async bookPlace(
+  @POST("/book-accomodation")
+  async bookAccomodation(
     @JsonApiBody("booking") body: BookingResource
   ): Promise<Result<unknown, Error>> {
     const validatedBody = await promiseToResult(
@@ -86,7 +82,7 @@ if (import.meta.vitest) {
       } as never
     );
 
-    const result = await controller.bookPlace({
+    const result = await controller.bookAccomodation({
       accomodation: "123",
       bookingRange: ["2021-01-01", "2021-01-02"],
       guests: 2,
@@ -114,7 +110,7 @@ if (import.meta.vitest) {
         } as never
     );
 
-    const result = await controller.bookPlace({
+    const result = await controller.bookAccomodation({
       accomodation: "123",
       bookingRange: ["2021-01-01", "2021-01-02"],
       guests: [],

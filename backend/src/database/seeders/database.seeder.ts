@@ -19,6 +19,7 @@ export class DatabaseSeeder extends Seeder {
             imgUrl: 'test',
             bookings: []
         });
+        
         await em.persistAndFlush(accomodation);
     }
 }

@@ -5,6 +5,7 @@ export default defineConfig({
     includeSource: [
       'src/**/*.ts',
     ],
+    threads: false,
     include: ["tests/**/*.test.ts"]
   },
   define: {

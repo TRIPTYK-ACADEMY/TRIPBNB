@@ -13,7 +13,7 @@ beforeAll(async () => {
 });
 
 it("It returns an array of error if validation fails", async () => {
-    const response = await fetch('http://localhost:3000/api/v1/accomodation/book-place', {
+    const response = await fetch('http://localhost:3000/api/v1/accomodation/book-accomodation', {
         method: 'POST',
         body: JSON.stringify({
             attributes: {
@@ -76,7 +76,7 @@ it("It returns an array of error if validation fails", async () => {
 });
 
 it("It returns a booking ressource on success", async () => {
-    const response = await fetch('http://localhost:3000/api/v1/accomodation/book-place', {
+    const response = await fetch('http://localhost:3000/api/v1/accomodation/book-accomodation', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ it("It returns a booking ressource on success", async () => {
           "version": "1.0",
         },
         "links": {
-          "self": "/api/v1//accomodation/book-place",
+          "self": "/api/v1/accomodation/book-place",
         },
       }
     `);

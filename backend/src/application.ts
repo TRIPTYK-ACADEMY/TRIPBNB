@@ -45,7 +45,6 @@ export class Application {
     const generator = this.orm.getSchemaGenerator();
     const seeder = this.orm.getSeeder();
 
-    await generator.ensureDatabase();
     await generator.refreshDatabase();
 
     await seeder.seed(DatabaseSeeder);
