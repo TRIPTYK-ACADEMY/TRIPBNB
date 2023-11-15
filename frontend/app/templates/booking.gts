@@ -7,6 +7,7 @@ import { BookingChangeset } from 'ember-boilerplate/changesets/booking';
 import BookingResume from 'ember-boilerplate/components/booking-resume';
 import FormsBooking from 'ember-boilerplate/components/forms/booking';
 import validationsBooking from 'ember-boilerplate/validations/booking';
+import pageTitle from 'ember-page-title/helpers/page-title';
 import RouteTemplate from 'ember-route-template';
 
 import type AccomodationModel from 'ember-boilerplate/models/accomodation';
@@ -38,6 +39,7 @@ class BookingRouteComponent extends Component<BookingRouteComponentSignature> {
   async book(changeset: BookingChangeset) {}
 
   <template>
+    {{pageTitle "TRIPNB - Réservation"}}
     <div class="self-stretch mt-20 mb-6 max-md:max-w-full max-md:mt-10">
       <div class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
         <FormsBooking

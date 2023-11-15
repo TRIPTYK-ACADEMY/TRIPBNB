@@ -7,6 +7,7 @@ import AccomodationCard from 'ember-boilerplate/components/accomodation-card';
 import LoadingIndicator from 'ember-boilerplate/components/loading-indicator';
 import SearchBar from 'ember-boilerplate/components/search-bar';
 import { task } from 'ember-concurrency';
+import pageTitle from 'ember-page-title/helpers/page-title';
 import RouteTemplate from 'ember-route-template';
 
 import type ArrayProxy from '@ember/array/proxy';
@@ -39,6 +40,7 @@ class ApplicationIndexRouteComponent extends Component<ApplicationIndexRouteSign
   }
 
   <template>
+    {{pageTitle "TRIPNB - Logements"}}
     <div class="my-10">
       <div class="flex max-md:flex-col max-md:items-stretch max-md:gap-0">
         <div class="flex flex-col items-stretch w-full">
