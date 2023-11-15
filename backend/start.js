@@ -20,9 +20,4 @@ const command = `nodemon  ${
   DEBUG ? "--inspect" : ""
 } --watch './src/**/*.ts' --exec 'node --loader ts-node/esm' ./src/application.bootstrap.ts`;
 
-if (REFRESH) {
-  spawnOrFail("pnpm mikro-orm:cli migration:fresh");
-  spawnOrFail("pnpm mikro-orm:cli seeder:run");
-}
-
 spawnOrFail(command);

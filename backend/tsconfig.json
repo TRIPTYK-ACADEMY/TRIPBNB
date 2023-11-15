@@ -13,7 +13,10 @@
     "verbatimModuleSyntax": true,
     "declaration": true,
     "outDir": "./dist",
+    "types": [
+      "vitest/importMeta" 
+    ],
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "tests/**/*", "vitest.workspace.ts", "config/**/*.ts"]
+  "include": ["src/**/*", "tests/**/*", "vitest.config.ts"]
 }
