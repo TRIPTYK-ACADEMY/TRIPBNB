@@ -16,11 +16,6 @@ import { LinkTo } from '@ember/routing';
             Accueil
           </LinkTo>
         </li>
-        <li>
-          <LinkTo @route="application" class="menu-item text-primary font-medium text-xl">
-            Ma réservation
-          </LinkTo>
-        </li>
       </ul>
     </nav>
   </header>

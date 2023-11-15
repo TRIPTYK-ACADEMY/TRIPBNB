@@ -182,35 +182,35 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
         <InputsValidation
           @label="Rue"
           @changeset={{@changeset}}
-          @validationField="adress.street"
+          @validationField="address.street"
           class="input_block col-span-8"
           data-test-input="street"
         />
         <InputsValidation
           @label="Numéro"
           @changeset={{@changeset}}
-          @validationField="adress.number"
+          @validationField="address.number"
           class="input_block col-span-4"
           data-test-input="number"
         />
         <InputsValidation
           @label="Ville"
           @changeset={{@changeset}}
-          @validationField="adress.city"
+          @validationField="address.city"
           class="input_block col-span-4"
           data-test-input="city"
         />
         <InputsValidation
           @label="Code Postal"
           @changeset={{@changeset}}
-          @validationField="adress.zip"
+          @validationField="address.zip"
           class="input_block col-span-4"
           data-test-input="zip"
         />
         <InputsValidation
           @label="Pays"
           @changeset={{@changeset}}
-          @validationField="adress.country"
+          @validationField="address.country"
           class="input_block col-span-4"
           data-test-input="country"
         />

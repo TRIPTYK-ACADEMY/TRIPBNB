@@ -6,7 +6,7 @@ const data = [
     id: '1',
     imgUrl: '/assets/images/accomadation1.jpg',
     name: 'Charmant appartement en plein coeur de la ville',
-    adress: {
+    address: {
       street: 'Allée du Marais',
       number: '58',
       zip: '7390',
@@ -31,7 +31,7 @@ const data = [
     id: '2',
     imgUrl: '/assets/images/accomadation2.jpg',
     name: 'Villa de luxe avec piscine privée et vue panoramique',
-    adress: {
+    address: {
       street: 'Rue de Cuesmes',
       number: '12',
       zip: '7012',
@@ -47,7 +47,7 @@ const data = [
     id: '3',
     imgUrl: '/assets/images/accomadation3.jpg',
     name: 'Studio artistique au coeur du quartier historique',
-    adress: {
+    address: {
       street: 'Grand-Place',
       number: '102',
       zip: '7500',
@@ -63,7 +63,7 @@ const data = [
     id: '4',
     imgUrl: '/assets/images/accomadation4.jpeg',
     name: 'Loft spacieux et lumineux au design contemporain',
-    adress: {
+    address: {
       street: 'Chaussée de Binche',
       number: '177A',
       zip: '7000',
