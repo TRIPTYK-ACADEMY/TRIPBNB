@@ -14,11 +14,9 @@ export interface BookingResumeSignature {
 }
 export default class BookingResumeComponent extends Component<BookingResumeSignature> {
   get numberOfDays() {
-    return this.args.changeset.numberOfDays;
+    return this.args.changeset.numberOfDays ?? 0;
   }
   get totalPrice() {
-    if (this.numberOfDays === 0) return 0;
-
     return this.args.accomodation.price * this.numberOfDays;
   }
 

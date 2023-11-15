@@ -36,12 +36,12 @@ export default class AccomodationCard extends Component<AccomodationCardSignatur
         <div class="flex items-center mt-2.5 font-thin text-primary">
           <img loading="lazy" src="/assets/icons/map-pin.svg" class="w-4 mr-0.5" />
           <span>
-            {{@accomodation.adress.street}},
-            {{@accomodation.adress.number}}
+            {{@accomodation.address.street}},
+            {{@accomodation.address.number}}
             -
-            {{@accomodation.adress.zip}}
-            {{@accomodation.adress.city}}
-            <span class="uppercase">{{@accomodation.adress.country}}</span>
+            {{@accomodation.address.zip}}
+            {{@accomodation.address.city}}
+            <span class="uppercase">{{@accomodation.address.country}}</span>
           </span>
         </div>
         <div class="tags mt-1.5 flex flex-wrap">

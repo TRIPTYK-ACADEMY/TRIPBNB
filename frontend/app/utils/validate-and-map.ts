@@ -24,6 +24,7 @@ export async function validateOneAndMapErrors<T extends Schema>(
   try {
     await schema.validateAt(dottedPathToJsonPath(path), dto, {
       abortEarly: false,
+      recursive: false
     });
 
     return [];

@@ -3,7 +3,7 @@ import Model, { attr } from '@ember-data/model';
 export default class AccomodationModel extends Model {
   @attr('string') declare name: string;
   @attr('string') declare imgUrl: string;
-  @attr() declare adress: {
+  @attr() declare address: {
     street: string;
     number: string;
     zip: string;
