@@ -31,9 +31,9 @@ export default class AccomodationCard extends Component<AccomodationCardSignatur
         src={{@accomodation.imgUrl}}
         class="object-cover object-right w-5/12 h-full overflow-hidden"
       />
-      <div class="flex flex-col w-7/12 p-6">
-        <h3 class="text-3xl font-medium">{{@accomodation.name}}</h3>
-        <div class="flex items-start mt-1 font-thin text-sm text-primary">
+      <div class="flex flex-col w-7/12 p-12">
+        <h3 class="text-3xl font-bold tracking-tighter">{{@accomodation.name}}</h3>
+        <div class="flex items-center mt-2.5 font-thin text-primary">
           <img loading="lazy" src="/assets/icons/map-pin.svg" class="w-4 mr-0.5" />
           <span>
             {{@accomodation.adress.street}},
@@ -51,9 +51,10 @@ export default class AccomodationCard extends Component<AccomodationCardSignatur
             >{{tag}}</span>
           {{/each}}
         </div>
-        <div class="flex items-center self-end flex-grow text-3xl my-16 font-light">
+        <div class="flex items-end self-end flex-grow text-3xl my-16 mb-4 font-bold">
           {{@accomodation.price}}
-          € par nuit
+          €
+          <span class="text-sm ml-1 font-light tracking-tighter">par nuit</span>
         </div>
         <div class="flex justify-between">
           <div class="flex items-center">
