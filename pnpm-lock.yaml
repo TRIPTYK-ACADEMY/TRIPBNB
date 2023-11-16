@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@triptyk/ember-input@2.0.0-alpha.11':
+    hash: wmy7s3yvaunda37oreoqee4rle
+    path: patches/@triptyk__ember-input@2.0.0-alpha.11.patch
+
 importers:
 
   .: {}
@@ -295,7 +300,7 @@ importers:
         version: 1.39.0
       '@triptyk/ember-input':
         specifier: ~2.0.0-alpha.11
-        version: 2.0.0-alpha.11(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-flatpickr@4.0.0)(ember-source@5.4.0)
+        version: 2.0.0-alpha.11(patch_hash=wmy7s3yvaunda37oreoqee4rle)(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-flatpickr@4.0.0)(ember-source@5.4.0)
       '@triptyk/ember-input-validation':
         specifier: ~2.0.0-alpha.11
         version: 2.0.0-alpha.11(@triptyk/ember-input@2.0.0-alpha.11)(ember-immer-changeset@1.0.0)(ember-source@5.4.0)
@@ -503,6 +508,9 @@ importers:
       jscpd:
         specifier: ~3.5.10
         version: 3.5.10
+      liquid-fire:
+        specifier: ^0.36.1
+        version: 0.36.1(@babel/core@7.23.3)(@ember/string@3.1.1)(@glint/template@1.2.1)(ember-source@5.4.0)(velocity-animate@1.5.2)
       loader.js:
         specifier: ~4.7.0
         version: 4.7.0
@@ -3868,7 +3876,7 @@ packages:
       '@babel/core': 7.23.3(supports-color@8.1.1)
       '@embroider/addon-shim': 1.8.7
       '@glimmer/component': 1.1.2(@babel/core@7.23.3)
-      '@triptyk/ember-input': 2.0.0-alpha.11(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-flatpickr@4.0.0)(ember-source@5.4.0)
+      '@triptyk/ember-input': 2.0.0-alpha.11(patch_hash=wmy7s3yvaunda37oreoqee4rle)(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-flatpickr@4.0.0)(ember-source@5.4.0)
       ember-immer-changeset: 1.0.0(@babel/core@7.23.3)(ember-source@5.4.0)
       ember-source: 5.4.0(@babel/core@7.23.3)(@glimmer/component@1.1.2)(@glint/template@1.2.1)(rsvp@4.8.5)(webpack@5.89.0)
       ember-test-selectors: 6.0.0
@@ -3876,7 +3884,7 @@ packages:
       - supports-color
     dev: true
 
-  /@triptyk/ember-input@2.0.0-alpha.11(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-flatpickr@4.0.0)(ember-source@5.4.0):
+  /@triptyk/ember-input@2.0.0-alpha.11(patch_hash=wmy7s3yvaunda37oreoqee4rle)(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-flatpickr@4.0.0)(ember-source@5.4.0):
     resolution: {integrity: sha512-XGXvzPzXxVyx8WXIfDzcPrgPtMIIqM/c1XaphAWD45jzHgJDFEaOUYpUf4IM/qWc6A8E/n7QMLWhJYKJvxGUhA==}
     peerDependencies:
       ember-flatpickr: '>=4.0.0'
@@ -3899,6 +3907,7 @@ packages:
       - '@glint/template'
       - supports-color
     dev: true
+    patched: true
 
   /@triptyk/ember-simple-auth-token@5.3.5(@ember/test-helpers@3.2.0)(@glint/template@1.2.1)(webpack@5.89.0):
     resolution: {integrity: sha512-NgMO6ym+0Chqt4Ve70mPv1qkgmaHP6UmCVgWgOnQwNWakWmuxGyXHEJ+GQLqNBx5H0aVypDXwWw0Dsi7INhNcw==}
@@ -3928,7 +3937,7 @@ packages:
       '@ember/test-waiters': 3.1.0
       '@embroider/addon-shim': 1.8.7
       '@glimmer/component': 1.1.2(@babel/core@7.23.3)
-      '@triptyk/ember-input': 2.0.0-alpha.11(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-flatpickr@4.0.0)(ember-source@5.4.0)
+      '@triptyk/ember-input': 2.0.0-alpha.11(patch_hash=wmy7s3yvaunda37oreoqee4rle)(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-flatpickr@4.0.0)(ember-source@5.4.0)
       ember-click-outside: 6.1.0(ember-source@5.4.0)
       ember-intl: 6.1.2(@babel/core@7.23.3)(@glint/template@1.2.1)(typescript@5.2.2)(webpack@5.89.0)
       ember-modifier: 4.1.0(ember-source@5.4.0)
@@ -13634,6 +13643,28 @@ packages:
       uc.micro: 1.0.6
     dev: true
 
+  /liquid-fire@0.36.1(@babel/core@7.23.3)(@ember/string@3.1.1)(@glint/template@1.2.1)(ember-source@5.4.0)(velocity-animate@1.5.2):
+    resolution: {integrity: sha512-kicEAmOngPuC94R279u61JpV1UkBvkS7WJqwOXh6SGMeuu6G43DAVBhI480v883uRsFAgwxkrSMhSMxd/t4sYw==}
+    peerDependencies:
+      '@ember/string': ^3.1.1
+      ember-source: '>= 4.0.0'
+      velocity-animate: ^1.5.2
+    dependencies:
+      '@ember/render-modifiers': 2.1.0(@babel/core@7.23.3)(@glint/template@1.2.1)(ember-source@5.4.0)
+      '@ember/string': 3.1.1
+      '@embroider/addon-shim': 1.8.7
+      '@embroider/macros': 1.13.3(@glint/template@1.2.1)
+      broccoli-funnel: 3.0.8
+      broccoli-merge-trees: 4.2.0
+      broccoli-stew: 3.0.0
+      ember-source: 5.4.0(@babel/core@7.23.3)(@glimmer/component@1.1.2)(@glint/template@1.2.1)(rsvp@4.8.5)(webpack@5.89.0)
+      velocity-animate: 1.5.2
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glint/template'
+      - supports-color
+    dev: true
+
   /livereload-js@3.4.1:
     resolution: {integrity: sha512-5MP0uUeVCec89ZbNOT/i97Mc+q3SxXmiUGhRFOTmhrGPn//uWVQdCvcLJDy64MSBR5MidFdOR7B9viumoavy6g==}
     dev: true
@@ -18673,6 +18704,10 @@ packages:
   /vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
+
+  /velocity-animate@1.5.2:
+    resolution: {integrity: sha512-m6EXlCAMetKztO1ppBhGU1/1MR3IiEevO6ESq6rcrSQ3Q77xYSW13jkfXW88o4xMrkXJhy/U7j4wFR/twMB0Eg==}
+    dev: true
 
   /vite-node@0.34.6(@types/node@20.9.0):
     resolution: {integrity: sha512-nlBMJ9x6n7/Amaz6F3zJ97EBwR2FkzhBRxF5e+jE6LA3yi6Wtc2lyTij1OnDMIr34v5g/tVQtsVAzhT0jc5ygA==}

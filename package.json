@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "pnpm": {
+    "patchedDependencies": {
+      "@triptyk/ember-input@2.0.0-alpha.11": "patches/@triptyk__ember-input@2.0.0-alpha.11.patch"
+    }
+  }
 }

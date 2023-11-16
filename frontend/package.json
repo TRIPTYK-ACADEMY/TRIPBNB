@@ -131,6 +131,7 @@
     "eslint-plugin-yml": "^1.10.0",
     "husky": "~8.0.3",
     "jscpd": "~3.5.10",
+    "liquid-fire": "^0.36.1",
     "loader.js": "~4.7.0",
     "msw": "^1.0.0",
     "postcss": "~8.4.31",

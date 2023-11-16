@@ -21,6 +21,7 @@ const InputsValidationComponent: TOC<InputsValidationComponentSignature> = <temp
     @label={{@label}}
     @locale="fr"
     @minDate={{@minDate}}
+    @disabledDates={{@disabledDates}}
     ...attributes
     as |TI|
   >

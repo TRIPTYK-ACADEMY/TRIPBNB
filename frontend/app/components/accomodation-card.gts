@@ -3,6 +3,8 @@ import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 
+import TpkLazyImage from '@triptyk/ember-ui/components/tpk-lazy-image';
+
 import type RouterService from '@ember/routing/router-service';
 import type AccomodationModel from 'ember-boilerplate/models/accomodation';
 
@@ -26,15 +28,15 @@ export default class AccomodationCard extends Component<AccomodationCardSignatur
 
   <template>
     <article class="rounded-md overflow-hidden bg-white flex w-full" ...attributes>
-      <img
-        loading="lazy"
+      <TpkLazyImage
+        @defaultImage="/assets/images/lazy.png"
         src={{@accomodation.imgUrl}}
         class="object-cover object-right w-5/12 h-full overflow-hidden"
       />
       <div class="flex flex-col w-7/12 p-12">
         <h3 class="text-3xl font-bold tracking-tighter">{{@accomodation.name}}</h3>
         <div class="flex items-center mt-2.5 font-thin text-primary">
-          <img loading="lazy" src="/assets/icons/map-pin.svg" class="w-4 mr-0.5" />
+          <img src="/assets/icons/map-pin.svg" class="w-4 mr-0.5" />
           <span>
             {{@accomodation.address.street}},
             {{@accomodation.address.number}}

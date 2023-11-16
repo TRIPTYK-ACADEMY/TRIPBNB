@@ -7,6 +7,7 @@ import FlashMessage from 'ember-cli-flash/components/flash-message';
 // @ts-expect-error no types
 import HeadLayout from 'ember-cli-head/components/head-layout';
 import RouteTemplate from 'ember-route-template';
+import liquidOutlet from 'liquid-fire/components/liquid-outlet';
 
 import type FlashMessageService from 'ember-cli-flash/services/flash-messages';
 
@@ -20,9 +21,9 @@ class ApplicationRouteComponent extends Component {
         <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
-    <div class="flex flex-col max-w-7xl mx-auto w-full px-8 xl:px-0">
+    <div class="flex flex-col max-w-7xl mx-auto w-full">
       <Header />
-      {{outlet}}
+      <liquidOutlet />
     </div>
   </template>
 }

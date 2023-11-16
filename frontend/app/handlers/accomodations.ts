@@ -16,12 +16,12 @@ const data = [
     tags: ['Rustique', 'Moderne'],
     disabledDates: [
       {
-        from: '2023-11-10',
-        to: '2023-11-17',
+        from: new Date('2023-11-10'),
+        to: new Date('2023-11-17'),
       },
       {
-        from: '2023-11-20',
-        to: '2023-11-23',
+        from: new Date('2023-11-20'),
+        to: new Date('2023-11-23'),
       },
     ],
     price: 287,

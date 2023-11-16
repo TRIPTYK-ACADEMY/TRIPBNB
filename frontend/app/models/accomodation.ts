@@ -10,7 +10,7 @@ export default class AccomodationModel extends Model {
     city: string;
     country: string;
   }
-  @attr() declare disabledDates: { from: string; to: string }[]
+  @attr() declare disabledDates: { from: Date; to: Date }[]
   @attr() declare tags: string[];
   @attr('number') declare price: number;
   @attr('number') declare maxGuests: number;

@@ -40,7 +40,7 @@ class BookingRouteComponent extends Component<BookingRouteComponentSignature> {
 
   <template>
     {{pageTitle "TRIPNB - Réservation"}}
-    <div class="self-stretch mt-20 mb-6 max-md:max-w-full max-md:mt-10">
+    <div class="self-stretch mt-20 mb-6 max-md:max-w-full max-md:mt-10 px-8 xl:px-0">
       <div class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
         <FormsBooking
           @changeset={{this.changeset}}

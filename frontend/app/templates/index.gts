@@ -41,7 +41,7 @@ class ApplicationIndexRouteComponent extends Component<ApplicationIndexRouteSign
 
   <template>
     {{pageTitle "TRIPNB - Logements"}}
-    <div class="my-10">
+    <div class="my-10 px-8 xl:px-0">
       <div class="flex max-md:flex-col max-md:items-stretch max-md:gap-0">
         <div class="flex flex-col items-stretch w-full">
           <div

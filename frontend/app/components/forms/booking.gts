@@ -21,7 +21,7 @@ export interface FormsBookingSignature {
     saveFunction: (changeset: BookingChangeset) => Promisable<unknown>;
     validationSchema: Schema;
     maxGuests: number;
-    disabledDates: { from: string; to: string }[];
+    disabledDates: { from: Date; to: Date }[];
   };
   Blocks: {
     default: [];
@@ -39,6 +39,7 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
   inc = (value: number): number => {
     return value + 1;
   };
+
   constructor(owner: unknown, args: FormsBookingSignature['Args']) {
     super(owner, args);
 
@@ -49,6 +50,10 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
     }
 
     this.guestsOptions = options;
+  }
+
+  get today() {
+    return new Date();
   }
 
   get minDate() {
@@ -117,7 +122,8 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
           @changeset={{@changeset}}
           @validationField="startAt"
           @label="Arrivée"
-          {{!-- @disable={{@disabledDates}} --}}
+          @minDate={{this.today}}
+          @disabledDates={{@disabledDates}}
           class="input_block col-span-6"
         />
         {{#if this.minDate}}
@@ -126,7 +132,7 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
             @validationField="endAt"
             @label="Départ"
             @minDate={{this.minDate}}
-            {{!-- @disable={{@disabledDates}} --}}
+            @disabledDates={{@disabledDates}}
             class="input_block col-span-6"
           />
         {{else}}
