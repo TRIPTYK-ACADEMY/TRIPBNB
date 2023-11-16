@@ -1,10 +1,9 @@
 import Component from '@glimmer/component';
 
-import type { BookingChangeset } from 'ember-boilerplate/changesets/booking';
 import type AccomodationModel from 'ember-boilerplate/models/accomodation';
 export interface BookingResumeSignature {
   Args: {
-    changeset: BookingChangeset;
+    numberOfDays: number;
     accomodation: AccomodationModel;
   };
   Blocks: {
@@ -13,11 +12,8 @@ export interface BookingResumeSignature {
   Element: HTMLDivElement;
 }
 export default class BookingResumeComponent extends Component<BookingResumeSignature> {
-  get numberOfDays() {
-    return this.args.changeset.numberOfDays ?? 0;
-  }
   get totalPrice() {
-    return this.args.accomodation.price * this.numberOfDays;
+    return this.args.accomodation.price * this.args.numberOfDays;
   }
 
   <template>
@@ -40,7 +36,7 @@ export default class BookingResumeComponent extends Component<BookingResumeSigna
           <div class="text-lg">
             {{@accomodation.price}}
             x
-            {{this.numberOfDays}}
+            {{@numberOfDays}}
             nuits
           </div>
           <div class="text-2xl text-secondary">

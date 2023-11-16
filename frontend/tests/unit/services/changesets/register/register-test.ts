@@ -1,7 +1,7 @@
 /* eslint-disable qunit/require-expect */
 import { module, test } from 'qunit';
 
-import { RegisterChangeset } from 'ember-boilerplate/changesets/register';
+import { BookingChangeset } from 'ember-boilerplate/changesets/register';
 import { setupTest } from 'ember-boilerplate/tests/helpers';
 import { setupMock } from 'ember-boilerplate/tests/worker';
 
@@ -32,7 +32,7 @@ module('Unit | Service | changesets/register', function (hooks) {
   }
 
   function saveChangeset() {
-    return service.save(new RegisterChangeset(changesetInitialData));
+    return service.save(new BookingChangeset(changesetInitialData));
   }
 
   test<ServiceWorkerTestContext>('It returns user model with adequate attributes', async function (assert) {

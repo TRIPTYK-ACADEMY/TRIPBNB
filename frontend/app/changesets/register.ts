@@ -11,4 +11,4 @@ export interface RegisterDTO {
   confirmPassword?: string;
 }
 
-export class RegisterChangeset extends ImmerChangeset<RegisterDTO> {}
+export class BookingChangeset extends ImmerChangeset<RegisterDTO> {}

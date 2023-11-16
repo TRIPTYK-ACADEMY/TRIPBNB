@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 
 import config from 'ember-boilerplate/config/environment';
 import { accomodationHandlers } from 'ember-boilerplate/handlers/accomodations';
+import { bookingHandlers } from 'ember-boilerplate/handlers/bookings';
 
 import type CurrentUserService from 'ember-boilerplate/services/current-user';
 import type { IntlService } from 'ember-intl';
@@ -32,7 +33,7 @@ async function setupMSW(context: object) {
   // @ts-expect-error rewritten
   let { default: setupServer } = await import('/setup-worker.js');
 
-  const server = setupServer([...accomodationHandlers]);
+  const server = setupServer([...accomodationHandlers, ...bookingHandlers]);
 
   await server.start();
 

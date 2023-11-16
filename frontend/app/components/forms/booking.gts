@@ -57,11 +57,7 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
   }
 
   get minDate() {
-    return this.args.changeset.get('startAt');
-  }
-
-  get guestsNumber() {
-    return this.args.changeset.get('number');
+    return this.args.changeset.get('start');
   }
 
   get guests() {
@@ -120,7 +116,7 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
         <h3 class="text-2xl font-semibold mt-8 mb-2 col-span-12">Votre voyage</h3>
         <InputsDatepickerValidation
           @changeset={{@changeset}}
-          @validationField="startAt"
+          @validationField="start"
           @label="Arrivée"
           @minDate={{this.today}}
           @disabledDates={{@disabledDates}}
@@ -129,7 +125,7 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
         {{#if this.minDate}}
           <InputsDatepickerValidation
             @changeset={{@changeset}}
-            @validationField="endAt"
+            @validationField="end"
             @label="Départ"
             @minDate={{this.minDate}}
             @disabledDates={{@disabledDates}}
@@ -221,7 +217,7 @@ export default class FormsBookingComponent extends Component<FormsBookingSignatu
           data-test-input="country"
         />
       </fieldset>
-      {{#if this.guestsNumber}}
+      {{#if this.guests.length}}
         <fieldset class="grid grid-cols-12 gap-x-10 gap-y-8">
           <h3 class="text-2xl font-semibold mt-8 col-span-12">Voyageurs</h3>
           {{#each this.guests as |guest index|}}
